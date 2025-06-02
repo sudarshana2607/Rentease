@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <!-- Profile Info -->
+  <h3>Profile Information</h3>
+  <ul>
+    <li><strong>Username:</strong> {{ profile.user.username }}</li>
+    <li><strong>Email:</strong> {{ profile.user.email }}</li>
+    <li><strong>Type:</strong> {{ profile.user_type }}</li>
+    <li><strong>Phone:</strong> {{ profile.phone }}</li>
+    <li><strong>Address:</strong> {{ profile.address }}</li>
+  </ul>
+
+  <!-- Bookings -->
+  <h3>Your Bookings</h3>
+  {% for booking in bookings %}
+    <div class="card">
+      <h4>{{ booking.property.name }}</h4>
+      <p>Status: {{ booking.status }}</p>
+      <p>From: {{ booking.start_date }}</p>
+      <p>To: {{ booking.end_date }}</p>
+      <a href="{% url 'property_detail' booking.property.id %}" class="btn btn-primary">View Property</a>
+      {% if booking.status == 'Pending' %}
+        <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger">Delete Booking</a>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>No bookings found.</p>
+  {% endfor %}
+
+</div>
+{% endblock %}
+<!-- templates/tenant_dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Tenant Dashboard - Rental Property Management{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Profile Information -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Profile Information</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>User Type:</strong> {{ user.userprofile.user_type|title }}</p>
+                    <p><strong>Phone:</strong> {{ user.userprofile.phone_number }}</p>
+                    <p><strong>Address:</strong> {{ user.userprofile.address }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Bookings -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Your Bookings</h4>
+                </div>
+                <div class="card-body">
+                    {% for booking in bookings %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ booking.property.title }}</h5>
+                                <p><strong>Status:</strong> 
+                                    {% if booking.status == 'pending' %}
+                                        Pending
+                                    {% elif booking.status == 'accepted' %}
+                                        {% if booking.payment.status == 'completed' %}
+                                            Payment Completed
+                                        {% else %}
+                                            Payment
+                                        {% endif %}
+                                    {% else %}
+                                        {{ booking.status|title }}
+                                    {% endif %}
+                                </p>
+                                <p><strong>From:</strong> {{ booking.start_date }}</p>
+                                <p><strong>To:</strong> {{ booking.end_date }}</p>
+                                <div>
+                                    <a href="{% url 'property_detail' booking.property.id %}" class="btn btn-primary btn-sm">View Property</a>
+                                    {% if booking.status == 'pending' %}
+                                        <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger btn-sm">Delete Booking</a>
+                                    {% endif %}
+                                    {% if booking.status == 'accepted' and booking.payment.status != 'completed' %}
+                                        <a href="{% url 'process_payment' booking.id %}" class="btn btn-success btn-sm">Make Payment</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="alert alert-info">
+                            <p>No bookings found.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

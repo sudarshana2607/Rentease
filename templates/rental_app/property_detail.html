@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ property.title }} - Rental Property Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <!-- Display Messages -->
+        {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>{{ property.title }}</h3>
+            </div>
+            <div class="card-body">
+                {% if images %}
+                <div id="propertyCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ property.title }}" style="height: 400px; object-fit: cover;">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if images|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <h5>Description</h5>
+                <p>{{ property.description }}</p>
+
+                <h5>Details</h5>
+                <ul class="list-unstyled">
+                    <li><strong>BHK:</strong> {{ property.bhk }} BHK</li>
+                    <li><strong>Price:</strong> ₹{{ property.price }}/month</li>
+                    <li><strong>Location:</strong> {{ property.address }}</li>
+                    <li><strong>Available:</strong> {% if property.is_available %}Yes{% else %}No{% endif %}</li>
+                </ul>
+
+                <!-- Lease Agreement Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4>Lease Agreement Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Lease Duration:</strong> 12 months</p>
+                        <p><strong>Security Deposit:</strong> ₹20,000</p>
+                        <p><strong>Notice Period:</strong> 2 months</p>
+                        <p><strong>Agreement Type:</strong> Standard Residential Lease</p>
+                        <p><strong>Other Terms:</strong> No pets allowed. Maintenance charges extra.</p>
+                    </div>
+                </div>
+
+                <!-- Reviews and Complaints Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="feedbackTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                                    Reviews <span class="badge bg-primary">{{ reviews|length }}</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="complaints-tab" data-bs-toggle="tab" data-bs-target="#complaints" type="button" role="tab">
+                                    Complaints <span class="badge bg-warning">{{ complaints|length }}</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="feedbackTabsContent">
+                            <!-- Reviews Tab -->
+                            <div class="tab-pane fade show active" id="reviews" role="tabpanel">
+                                {% if reviews %}
+                                    {% for review in reviews %}
+                                        <div class="mb-3 border-bottom pb-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <strong>{{ review.user.user.username }}</strong>
+                                                <small class="text-muted">{{ review.created_at|date:"M d, Y H:i" }}</small>
+                                            </div>
+                                            <div class="text-warning mb-2">
+                                                {% for i in "12345"|slice:":review.rating" %}<i class="bi bi-star-fill"></i>{% endfor %}
+                                                {% for i in "12345"|slice:"review.rating:" %}<i class="bi bi-star"></i>{% endfor %}
+                                            </div>
+                                            <p class="mb-1">{{ review.comment }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No reviews yet. Be the first to review this property!</p>
+                                {% endif %}
+
+                                {% if user.is_authenticated and user.userprofile.user_type == 'tenant' and review_form %}
+                                    <div class="mt-4">
+                                        <h5>Submit a Review</h5>
+                                        <form method="post" action="{% url 'submit_review' property.pk %}">
+                                            {% csrf_token %}
+                                            {{ review_form|crispy }}
+                                            <button type="submit" class="btn btn-success">Submit Review</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Complaints Tab -->
+                            <div class="tab-pane fade" id="complaints" role="tabpanel">
+                                {% if complaints %}
+                                    {% for complaint in complaints %}
+                                        <div class="mb-3 border-bottom pb-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <strong>{{ complaint.tenant.user.username }}</strong>
+                                                <small class="text-muted">{{ complaint.created_at|date:"M d, Y H:i" }}</small>
+                                            </div>
+                                            <h6 class="mt-2">{{ complaint.title }}</h6>
+                                            <p class="mb-1">{{ complaint.description }}</p>
+                                            <div class="mt-2">
+                                                <span class="badge {% if complaint.status == 'pending' %}bg-warning{% elif complaint.status == 'resolved' %}bg-success{% else %}bg-danger{% endif %}">
+                                                    {{ complaint.status|title }}
+                                                </span>
+                                            </div>
+                                            {% if is_landlord and complaint.status == 'pending' %}
+                                                <div class="mt-3">
+                                                    <form method="post" action="{% url 'update_complaint_status' complaint.id %}" class="d-inline">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="status" value="resolved">
+                                                        <button type="submit" class="btn btn-success btn-sm">Mark as Resolved</button>
+                                                    </form>
+                                                    <form method="post" action="{% url 'update_complaint_status' complaint.id %}" class="d-inline">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="status" value="rejected">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No complaints have been filed for this property.</p>
+                                {% endif %}
+
+                                {% if user.is_authenticated and user.userprofile.user_type == 'tenant' and complaint_form %}
+                                    <div class="mt-4">
+                                        <h5>Submit a Complaint</h5>
+                                        <form method="post" action="{% url 'submit_complaint' property.pk %}">
+                                            {% csrf_token %}
+                                            {{ complaint_form|crispy }}
+                                            <button type="submit" class="btn btn-warning">Submit Complaint</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.is_authenticated and user.userprofile.user_type == 'tenant' and property.is_available %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4>Book This Property</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'book_property' property.pk %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">Start Date</label>
+                                <input type="date" name="start_date" id="start_date" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">End Date</label>
+                                <input type="date" name="end_date" id="end_date" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Property Details</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>BHK:</strong> {{ property.bhk }}</p>
+                    <p><strong>Price:</strong> ₹{{ property.price }}/month</p>
+                    <p><strong>Model Type:</strong> {{ property.model_type|title }}</p>
+                    <p><strong>Year Built:</strong> {{ property.year_built }}</p>
+                    <p><strong>Address:</strong> {{ property.address }}</p>
+                    
+                    <div class="mt-4">
+                        <h5>Landlord Information</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <strong>Name:</strong> {{ property.landlord.user.username }}<br>
+                                <strong>Phone:</strong> {{ property.landlord.phone_number }}<br>
+                                <strong>Address:</strong> {{ property.landlord.address }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {% if user.is_authenticated and user.userprofile.user_type == 'landlord' and user.userprofile == property.landlord and image_form %}
+            <div class="card">
+                <div class="card-header">
+                    <h4>Property Management</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'add_property' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ image_form|crispy }}
+                        <button type="submit" class="btn btn-primary">Add Image</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} {% if user.is_authenticated and user.userprofile.user_type == 'tenant' and property.is_available %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Book This Property</h4>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{% url 'book_property' property.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% if user.is_authenticated and user.userprofile.user_type == 'tenant' and property.is_available %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Book This Property</h4>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{% url 'book_property' property.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+        </form>
+    </div>
+</div>
+{% endif %}

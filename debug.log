@@ -1,0 +1,226 @@
+Managing bookings for user jaanu (type: landlord)
+Found 0 bookings for landlord jaanu
+Attempting to book property 6 by user aaadi
+Created booking 7 for property Modern 2BHK Apartment
+Created payment record 2 for booking 7
+Attempting to book property 1 by user aaju
+Created booking 8 for property Modern 2BHK Apartment
+Created payment record 3 for booking 8
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Attempting to book property 2 by user chitra
+Created booking 9 for property Luxury 3BHK Villa
+Created payment record 4 for booking 9
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Attempting to book property 2 by user chitra
+Created booking 10 for property Luxury 3BHK Villa
+Created payment record 5 for booking 10
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Attempting to book property 3 by user chitra
+Created booking 11 for property Cozy 1BHK Studio
+Created payment record 6 for booking 11
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Attempting to book property 6 by user chitra
+Created booking 12 for property Modern 2BHK Apartment
+Created payment record 7 for booking 12
+Attempting to book property 8 by user chitra
+Created booking 13 for property Cozy 1BHK Studio
+Created payment record 8 for booking 13
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Attempting to book property 24 by user chitra
+Created booking 14 for property Family 4BHK Villa
+Created payment record 9 for booking 14
+Managing bookings for user akshu (type: landlord)
+Found 0 bookings for landlord akshu
+Attempting to book property 167 by user chitra
+Created booking 15 for property FAMILY 3BHK
+Created payment record 10 for booking 15
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: pending, Created: 2025-05-21 16:01:17.378244+00:00
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: pending, Created: 2025-05-21 16:01:17.378244+00:00
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: pending, Created: 2025-05-21 16:01:17.378244+00:00
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: pending, Created: 2025-05-21 16:01:17.378244+00:00
+Updating booking 15 status to accepted by user akshu
+Updated booking 15 status to accepted
+Updated payment status for booking 15
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: accepted, Created: 2025-05-21 16:01:17.378244+00:00
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: accepted, Created: 2025-05-21 16:01:17.378244+00:00
+Updating booking 15 status to payment by user akshu
+Updated booking 15 status to payment
+Managing bookings for user akshu (type: landlord)
+Found 1 bookings for landlord akshu
+Booking ID: 15, Property: FAMILY 3BHK, Tenant: chitra, Status: payment, Created: 2025-05-21 16:01:17.378244+00:00
+Attempting to book property 1 by user aaadi
+Created booking 16 for property Modern 2BHK Apartment
+Created payment record 11 for booking 16
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user luxx (type: landlord)
+Found 0 bookings for landlord luxx
+Managing bookings for user lux (type: landlord)
+Found 0 bookings for landlord lux
+Attempting to book property 168 by user aaadi
+Created booking 17 for property FAMILY 3BHK
+Created payment record 12 for booking 17
+Managing bookings for user lux (type: landlord)
+Found 1 bookings for landlord lux
+Booking ID: 17, Property: FAMILY 3BHK, Tenant: aaadi, Status: pending, Created: 2025-05-21 17:28:07.803384+00:00
+Updating booking 17 status to accepted by user lux
+Updated booking 17 status to accepted
+Updated payment status for booking 17
+Managing bookings for user lux (type: landlord)
+Found 1 bookings for landlord lux
+Booking ID: 17, Property: FAMILY 3BHK, Tenant: aaadi, Status: accepted, Created: 2025-05-21 17:28:07.803384+00:00
+Updating booking 17 status to payment by user lux
+Updated booking 17 status to payment
+Managing bookings for user lux (type: landlord)
+Found 1 bookings for landlord lux
+Booking ID: 17, Property: FAMILY 3BHK, Tenant: aaadi, Status: payment, Created: 2025-05-21 17:28:07.803384+00:00
+Managing bookings for user lux (type: landlord)
+Found 1 bookings for landlord lux
+Booking ID: 17, Property: FAMILY 3BHK, Tenant: aaadi, Status: payment, Created: 2025-05-21 17:28:07.803384+00:00
+Managing bookings for user aaadi (type: tenant)
+Found 1 bookings for tenant aaadi
+Managing bookings for user lux (type: landlord)
+Found 1 bookings for landlord lux
+Booking ID: 17, Property: FAMILY 3BHK, Tenant: aaadi, Status: payment, Created: 2025-05-21 17:28:07.803384+00:00
+Managing bookings for user kavi (type: landlord)
+Found 0 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 0 bookings for landlord kavi
+Attempting to book property 171 by user aaadi
+Created booking 18 for property Family 1BHK
+Created payment record 13 for booking 18
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: pending, Created: 2025-05-22 00:17:00.746996+00:00
+Updating booking 18 status to accepted by user kavi
+Updated booking 18 status to accepted
+Updated payment status for booking 18
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: accepted, Created: 2025-05-22 00:17:00.746996+00:00
+Updating booking 18 status to payment by user kavi
+Updated booking 18 status to payment
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Booking ID: 18, Property: Family 1BHK, Tenant: aaadi, Status: payment, Created: 2025-05-22 00:17:00.746996+00:00
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 1 bookings for landlord kavi
+Attempting to book property 170 by user deepa
+Created booking 19 for property luxury 2BHK cozyhouse
+Created payment record 14 for booking 19
+Managing bookings for user deepa (type: tenant)
+Found 1 bookings for tenant deepa
+Managing bookings for user kavi (type: landlord)
+Found 2 bookings for landlord kavi
+Managing bookings for user kavi (type: landlord)
+Found 2 bookings for landlord kavi

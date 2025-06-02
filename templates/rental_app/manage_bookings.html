@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Bookings{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Manage Bookings</h1>
+
+    <div class="alert alert-info">
+        Found 3 bookings for your properties
+    </div>
+
+    {% if bookings %}
+        <div class="row">
+            {% for booking in bookings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">{{ booking.property.title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <strong>Tenant:</strong> {{ booking.tenant.user.username }}<br>
+                                <strong>Tenant Phone:</strong> {{ booking.tenant.phone_number }}<br>
+                                <strong>Tenant Address:</strong> {{ booking.tenant.address }}<br>
+                                <strong>Property Price:</strong> ₹{{ booking.property.price }}/month<br>
+                                <strong>Start Date:</strong> {{ booking.start_date }}<br>
+                                <strong>End Date:</strong> {{ booking.end_date }}<br>
+                                <strong>Status:</strong> 
+                                <span class="badge {% if booking.status == 'pending' %}bg-warning{% elif booking.status == 'accepted' %}bg-success{% else %}bg-danger{% endif %}">
+                                    {{ booking.status|title }}
+                                </span><br>
+                                <strong>Booking Date:</strong> {{ booking.created_at|date:"M d, Y H:i" }}
+                                <strong>Amount:</strong> ₹{{ booking.property.price }}/month<br>
+                                {% if booking.status == 'accepted' %}
+                                    <strong>Payment Status:</strong> 
+                                    {% if booking.payment.status == 'completed' %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Pending</span>
+                                        <a href="{% url 'process_payment' booking.id %}" class="btn btn-success btn-sm mt-2">
+                                            <i class="bi bi-credit-card"></i> Make Payment
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+                            {% if user_type == 'landlord' and booking.status == 'pending' %}
+                            <div class="d-flex gap-2">
+                                <form method="post" action="{% url 'update_booking_status' booking.id 'accepted' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success">Accept</button>
+                                </form>
+                                <form method="post" action="{% url 'update_booking_status' booking.id 'rejected' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                            {% if user_type == 'landlord' %}
+                            <form method="post" action="{% url 'delete_booking' booking.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm mt-2">Delete</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">No Bookings Found</h4>
+            <p>You don't have any booking requests for your properties yet.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

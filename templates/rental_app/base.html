@@ -1,0 +1,8 @@
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manage_bookings' %}">Manage Bookings</a>
+                </li>
+                {% if user.is_authenticated and user.userprofile.user_type == 'landlord' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'landlord_reviews_complaints' %}">View Complaints & Reviews</a>
+                </li>
+                {% endif %} 

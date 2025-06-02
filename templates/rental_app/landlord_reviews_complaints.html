@@ -1,0 +1,46 @@
+{% extends 'rental_app/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Reviews and Complaints</h2>
+    <div class="alert alert-info">
+        Debug: {{ reviews|length }} reviews, {{ complaints|length }} complaints found.
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Reviews</h3>
+            {% if reviews %}
+                <div class="list-group">
+                    {% for review in reviews %}
+                        <div class="list-group-item">
+                            <h5>{{ review.property.title }}</h5>
+                            <p>{{ review.comment }}</p>
+                            <small>Rating: {{ review.rating }}/5</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Complaints</h3>
+            {% if complaints %}
+                <div class="list-group">
+                    {% for complaint in complaints %}
+                        <div class="list-group-item">
+                            <h5>{{ complaint.property.title }}</h5>
+                            <p>{{ complaint.description }}</p>
+                            <small>Status: {{ complaint.status }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No complaints yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

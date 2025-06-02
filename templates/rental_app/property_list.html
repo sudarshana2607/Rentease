@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Properties - Rental Property Management{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Filter Sidebar -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Filter Properties</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="{% url 'property_list' %}">
+                        <div class="mb-3">
+                            <label for="bhk" class="form-label">BHK Type</label>
+                            <select name="bhk" id="bhk" class="form-select">
+                                <option value="">All</option>
+                                {% for value, label in bhk_choices %}
+                                    <option value="{{ value }}" {% if current_filters.bhk == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="min_price" class="form-label">Min Price</label>
+                            <input type="number" name="min_price" id="min_price" class="form-control" 
+                                   value="{{ current_filters.min_price }}" placeholder="Min Price">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="max_price" class="form-label">Max Price</label>
+                            <input type="number" name="max_price" id="max_price" class="form-control" 
+                                   value="{{ current_filters.max_price }}" placeholder="Max Price">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="model_type" class="form-label">Model Type</label>
+                            <select name="model_type" id="model_type" class="form-select">
+                                <option value="">All</option>
+                                {% for value, label in model_type_choices %}
+                                    <option value="{{ value }}" {% if current_filters.model_type == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        <a href="{% url 'property_list' %}" class="btn btn-outline-secondary w-100 mt-2">Clear Filters</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Listings -->
+        <div class="col-md-9">
+            <h2>Available Properties</h2>
+            {% if properties %}
+                <div class="row">
+                    {% for property in properties %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            {% if property.images.exists %}
+                                <img src="{{ property.images.first.image.url }}" class="card-img-top" alt="{{ property.title }}" 
+                                     style="height: 200px; object-fit: cover;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ property.title }}</h5>
+                                <p class="card-text">{{ property.description|truncatewords:20 }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="bi bi-house-door"></i> {{ property.bhk }}<br>
+                                        <i class="bi bi-currency-rupee"></i> {{ property.price }}/month<br>
+                                        <i class="bi bi-geo-alt"></i> {{ property.address|truncatewords:10 }}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <a href="{% url 'property_detail' property.pk %}" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    No properties found matching your criteria.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} 
